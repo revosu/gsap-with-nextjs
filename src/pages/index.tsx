@@ -1,26 +1,32 @@
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { useEffect, useRef } from 'react';
 
 export default function Home() {
-  const img = useRef<HTMLDivElement>(null);
+  const imgWrap = useRef<HTMLDivElement>(null);
+  if (typeof window === 'object') {
+    const img = document.querySelectorAll('.js-parallax');
+    useEffect(() => {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.fromTo(img, {
+        y: 0,
+      },
+      {
+        y: -100,
+        scrollTrigger: {
+          trigger: imgWrap.current,
+          start: "top center",
+          end: "bottom center",
+          onEnter: () => {},
+          onEnterBack: () => {},
+          scrub: 1,
+        }
+      });
+    }, []);
+  }
 
-  useEffect(() => {
-    gsap.fromTo(img.current, {
-      y: 0,
-    },
-    {
-      y: -30,
-      ease: "none",
-      scrollTrigger: {
-        trigger: img.current,
-        start: "top center",
-        end: "bottom center",
-        scrub: 1,
-      }
-    });
-  }, [img]);
   return (
     <>
       <main>
@@ -32,8 +38,9 @@ export default function Home() {
             <div className={styles.layoutHeadingL}>
               <h2>parallax</h2>
             </div>
-            <div ref={img} className={`${styles.imgWrapper} js-parallax`}>
+            <div ref={imgWrap} className={`${styles.imgWrapper}`}>
               <Image
+                className='js-parallax'
                 src="/parallax.jpg"
                 alt="視差効果の検証用"
                 fill
