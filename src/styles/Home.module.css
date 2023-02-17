@@ -1,1 +1,18 @@
+.pageMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+}
 
+.layoutHeadingL {
+  margin: 40px auto;
+}
+
+.imgWrapper {
+  position: relative;
+  overflow: hidden;
+  width: 1200px;
+  height: 800px;
+}
