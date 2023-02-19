@@ -10,8 +10,18 @@
   margin: 40px auto;
 }
 
-.imgWrapper {
+.imgBlock {
   overflow: hidden;
+}
+
+.imgWrapper {
+  position: relative;
   width: 1200px;
   height: 800px;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

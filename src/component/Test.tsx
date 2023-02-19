@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import { gsap } from 'gsap';
@@ -6,32 +6,27 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
 const Test = () => {
   const imgElem = useRef<HTMLImageElement>(null);
-  useEffect(() => {
+  useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    gsap.fromTo(imgElem.current , {
-      scale: 1
-    }, {
-      scale: 1.4,
+    gsap.to(imgElem.current , {
+      y: -200,
       scrollTrigger: {
         trigger: imgElem.current,
         start: "top bottom",
         end: "bottom top",
-        onEnter: () => {},
-        onEnterBack: () => {},
-        scrub: 2,
+        scrub: 1,
       }
     });
   }, []);
   return (
     <>
-      <div>
-        <div className={`${styles.imgWrapper}`}>
+      <div className={`${styles.imgBlock}`}>
+        <div ref={imgElem} className={`${styles.imgWrapper}`}>
           <Image
-            ref={imgElem}
+            className='image'
             src="/parallax.jpg"
             alt="視差効果の検証用"
-            width={1200}
-            height={800}
+            fill
           />
         </div>
         <div>
