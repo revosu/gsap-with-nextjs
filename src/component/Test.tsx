@@ -9,17 +9,16 @@ const Test = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     gsap.fromTo(imgElem.current , {
-      y: 0,
-    },
-    {
-      y: -200,
+      scale: 1
+    }, {
+      scale: 1.4,
       scrollTrigger: {
         trigger: imgElem.current,
-        start: "top center",
-        end: "bottom center",
+        start: "top bottom",
+        end: "bottom top",
         onEnter: () => {},
         onEnterBack: () => {},
-        scrub: true,
+        scrub: 2,
       }
     });
   }, []);
@@ -29,10 +28,10 @@ const Test = () => {
         <div className={`${styles.imgWrapper}`}>
           <Image
             ref={imgElem}
-            className='js-parallax'
             src="/parallax.jpg"
             alt="視差効果の検証用"
-            fill
+            width={1200}
+            height={800}
           />
         </div>
         <div>
