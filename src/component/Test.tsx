@@ -8,7 +8,9 @@ const Test = () => {
   const imgElem = useRef<HTMLImageElement>(null);
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    gsap.to(imgElem.current , {
+    gsap.fromTo(imgElem.current , {
+      y: 0,
+    }, {
       y: -200,
       scrollTrigger: {
         trigger: imgElem.current,
@@ -20,10 +22,11 @@ const Test = () => {
   }, []);
   return (
     <>
-      <div className={`${styles.imgBlock}`}>
-        <div ref={imgElem} className={`${styles.imgWrapper}`}>
+      <div>
+        <div className={`${styles.imgWrapper}`}>
           <Image
-            className='image'
+            ref={imgElem}
+            className={`${styles.image}`}
             src="/parallax.jpg"
             alt="視差効果の検証用"
             fill

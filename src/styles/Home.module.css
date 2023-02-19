@@ -10,18 +10,22 @@
   margin: 40px auto;
 }
 
-.imgBlock {
-  overflow: hidden;
-}
-
 .imgWrapper {
   position: relative;
-  width: 1200px;
-  height: 800px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.imgWrapper::before {
+  content: '';
+  display: block;
+  padding-top: 66%;
 }
 
 .image {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: auto !important;
 }
